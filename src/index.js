@@ -38,17 +38,17 @@ function inputSearch(event) {
       }
       if (countries.length >= 2 && countries.length <= 10) {
         cleanCountryInfo();
-        renderCountriesName(countries);
+        createAllCountriesMarkup(countries);
       }
       if (countries.length === 1) {
         cleancountryList();
-        renderCountryInfo(countries);
+        createCountryMarkup(countries);
       }
     })
     .catch(error => Notify.failure('Oops, there is no country with that name'));
 }
 
-function renderCountriesName(arrayCountriesName) {
+function createAllCountriesMarkup(arrayCountriesName) {
   const markup = arrayCountriesName
     .map(({ name, flags }) => {
       return `<li><img src="${flags.svg}" alt="${flags.alt}" width="25" height="15"><span>${name.common}</span></li>`;
@@ -57,14 +57,12 @@ function renderCountriesName(arrayCountriesName) {
   countryList.innerHTML = markup;
 }
 
-function renderCountryInfo(countryName) {
+function createCountryMarkup(countryName) {
   const markup = countryName.map(
     ({ name, flags, capital, population, languages }) => {
       return `<h2><img src="${flags.svg}" alt="${
         flags.alt
-      }" width="40" height="30"><span class="country-name">${
-        name.common
-      }</span></H2>
+      }" width="50" height="50">${name.common}</h2>
         <p><b>Capital:</b> ${capital}</p>
         <p><b>Population:</b> ${population}</p>
         <p><b>Languages:</b> ${Object.values(languages).join(', ')}</p>`;
